@@ -1,6 +1,6 @@
 # Purdue Food Menu
 ### Purdue University CNIT 25501, Spring 2021 semester Final Project
-#### Doyoon Kim, Ryan Gatler
+#### Doyoon Kim, Ryan Getler
 ------------------------
 ## Project Overview
 ````
