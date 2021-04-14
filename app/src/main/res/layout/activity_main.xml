@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/TestTextBox"
+        android:id="@+id/helloWorld_TextView"
         android:layout_width="76dp"
         android:layout_height="0dp"
         android:layout_marginStart="16dp"
@@ -29,6 +29,6 @@
         android:text="Click Me!"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TestTextBox" />
+        app:layout_constraintTop_toBottomOf="@+id/helloWorld_TextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
