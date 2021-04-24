@@ -1,6 +1,5 @@
-package com.yoonlab.purduefoodmenu;
+package com.yoonlab.purduefoodmenu.credentials;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class UserDB {
