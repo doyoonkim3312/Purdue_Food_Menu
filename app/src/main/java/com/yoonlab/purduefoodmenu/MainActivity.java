@@ -7,14 +7,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-        
+
 public class MainActivity extends AppCompatActivity { //Activity is like page with in the book(App)
 
     private boolean buttonClickStatus = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) { //Protected = Kind of like a mid level between public and private
-        // Treat this method as a public static void main String[] args() {...}  
+        // Treat this method as a public static void main String[] args() {...}
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //**********************************************************************************************
