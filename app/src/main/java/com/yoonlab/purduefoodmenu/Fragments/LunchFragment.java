@@ -3,11 +3,15 @@ package com.yoonlab.purduefoodmenu.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
+import com.yoonlab.purduefoodmenu.Adapter.RecyclerViewAdapter;
 import com.yoonlab.purduefoodmenu.Models.Item;
 import com.yoonlab.purduefoodmenu.Models.Menu;
 import com.yoonlab.purduefoodmenu.Models.Station;
@@ -22,7 +26,7 @@ import java.util.ArrayList;
  */
 public class LunchFragment extends Fragment {
 
-    private ArrayList<String> lunchResult = new ArrayList<>();
+    private ArrayList<Item> lunchResult = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,9 +40,7 @@ public class LunchFragment extends Fragment {
     public LunchFragment(Menu lunchMenu) {
         for (Station station: lunchMenu.getMeals().getMealList().get(1).getStations()
                 .getStationList()) {
-            for (Item item: station.getItems().getItemList()) {
-                lunchResult.add(item.getItemName());
-            }
+            lunchResult.addAll(station.getItems().getItemList());
         }
     }
 
@@ -60,6 +62,13 @@ public class LunchFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_lunch, container, false);
+        RecyclerView lunchRecyclerView = view.findViewById(R.id.lunchRecyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext(),
+                LinearLayoutManager.VERTICAL, false);
+        lunchRecyclerView.setLayoutManager(layoutManager);
+
+        RecyclerViewAdapter lunchRecyclerViewAdapter = new RecyclerViewAdapter(lunchResult);
+        lunchRecyclerView.setAdapter(lunchRecyclerViewAdapter);
         return view;
     }
 }
