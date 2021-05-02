@@ -2,10 +2,13 @@ package com.yoonlab.purduefoodmenu;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import javax.xml.transform.Result;
 
 
 public class MainActivity extends AppCompatActivity { //Activity is like page with in the book(App)
@@ -18,21 +21,23 @@ public class MainActivity extends AppCompatActivity { //Activity is like page wi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //**********************************************************************************************
-        TextView Hello_World = findViewById(R.id.helloWorld_TextView);
-        Button Test_Button = findViewById(R.id.testBtn);
 
+        //Buttons
+        findViewById(R.id.earhartButton).setOnClickListener(startActivityWithIntent("Earhart"));
+        findViewById(R.id.fordButton).setOnClickListener(startActivityWithIntent("Ford"));
+        findViewById(R.id.hillenbrandButton).setOnClickListener(startActivityWithIntent("Hillenbrand"));
+        findViewById(R.id.wileyButton).setOnClickListener(startActivityWithIntent("Wiley"));
+        findViewById(R.id.windsorButton).setOnClickListener(startActivityWithIntent("Windsor"));
+    }
 
-        Test_Button.setOnClickListener(new View.OnClickListener() {
+    public View.OnClickListener startActivityWithIntent(String courtName) {
+        return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (buttonClickStatus == false) {
-                    Hello_World.setText("This is my first Android Application!");
-                    buttonClickStatus = true;
-                } else {
-                    Hello_World.setText("Hello World");
-                    buttonClickStatus= false;
-                }
+                Intent intent = new Intent(getApplicationContext(), ResultActivity.class);
+                intent.putExtra("court", courtName);
+                startActivity(intent);
             }
-        });
+        };
     }
 }
