@@ -3,6 +3,7 @@ package com.yoonlab.purduefoodmenu.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,6 +32,7 @@ public class MenuDisplayFragment extends Fragment {
     private String courtName;
     private String timePath;
     private int mealIndex;
+    private int currentTime;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -41,10 +43,11 @@ public class MenuDisplayFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public MenuDisplayFragment(String courtName, String timePath, int mealIndex) {
+    public MenuDisplayFragment(String courtName, String timePath, String currentTime, int mealIndex) {
         this.courtName = courtName;
         this.timePath = timePath;
         this.mealIndex = mealIndex;
+        this.currentTime = Integer.parseInt(currentTime.replace(":", ""));
     }
 
     public MenuDisplayFragment() {
@@ -69,9 +72,10 @@ public class MenuDisplayFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext(),
                 LinearLayoutManager.VERTICAL, false);
         breakfastRecyclerView.setLayoutManager(layoutManager);
+        breakfastRecyclerView.addItemDecoration(new DividerItemDecoration(view.getContext(), 1));
 
         //StartAPI Connection.
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://api.hfs.purdue.edu/")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.hfs.purdue.edu/")
                 .client(new OkHttpClient())
                 .addConverterFactory(SimpleXmlConverterFactory.create()).build();
         Call<Menu> retrofitCall = retrofit.create(apiService.class).getMenu(courtName, timePath);
@@ -79,15 +83,26 @@ public class MenuDisplayFragment extends Fragment {
             @Override
             public void onResponse(Call<Menu> call, Response<Menu> response) {
                 if (response.isSuccessful()) {
+                    Menu MenuResult = response.body();
                     try {
                         System.out.println("Called Success");
                         ArrayList<Item> resultList = new ArrayList<>();
-                        for (Station station: response.body().getMeals().getMealList().get(mealIndex)
+                        for (Station station: MenuResult.getMeals().getMealList().get(mealIndex)
                                 .getStations().getStationList()) {
                             for (Item item: station.getItems().getItemList()) {
                                 resultList.add(item);
                             }
                         }
+                        int[] operating = MenuResult.getMeals().getMealList().get(mealIndex).getHours()
+                                .getOperatingInfo();
+                        if (currentTime >= operating[0] && currentTime <= operating[1]) {
+                            Toast.makeText(view.getContext(), "Status: Open", Toast.LENGTH_LONG)
+                                    .show();
+                        } else {
+                            Toast.makeText(view.getContext(), "Status: Close", Toast.LENGTH_LONG)
+                                    .show();
+                        }
+
                         RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(resultList);
                         breakfastRecyclerView.setAdapter(recyclerViewAdapter);
                     } catch (NullPointerException npe) {
@@ -98,7 +113,7 @@ public class MenuDisplayFragment extends Fragment {
                 } else {
                     System.out.println("Null Detected");
                     Toast.makeText(view.getContext(), "Failed: Menu cannot be loaded"
-                            , Toast.LENGTH_LONG).show();
+                            , Toast.LENGTH_SHORT).show();
                 }
             }
 
