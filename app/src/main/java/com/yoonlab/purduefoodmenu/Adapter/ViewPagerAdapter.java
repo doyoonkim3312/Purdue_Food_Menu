@@ -17,6 +17,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
     private Calendar calendar = Calendar.getInstance();
     private String courtName;
     private String timePath;
+    private String currentTime;
     // private Menu menuResult = new Menu();
 
     public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity, String courtName, Context context) {
@@ -24,7 +25,10 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
         this.courtName = courtName;
 
         SimpleDateFormat mdyFormat = new SimpleDateFormat("MM-dd-yyyy");
+        SimpleDateFormat time = new SimpleDateFormat("kk:mm:ss");
         this.timePath = mdyFormat.format(calendar.getTime());
+        this.currentTime = time.format(calendar.getTime());
+        System.out.println(currentTime);
     }
 
     @NonNull
@@ -33,16 +37,16 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
 
         switch (position) {
             case 0: {
-                return new MenuDisplayFragment(courtName, timePath, 0);
+                return new MenuDisplayFragment(courtName, timePath, currentTime, 0);
             }
             case 1: {
-                return new MenuDisplayFragment(courtName, timePath, 1);
+                return new MenuDisplayFragment(courtName, timePath, currentTime, 1);
             }
             case 2: {
-                return new MenuDisplayFragment(courtName, timePath, 2);
+                return new MenuDisplayFragment(courtName, timePath, currentTime, 2);
             }
         }
-        return new MenuDisplayFragment(courtName, timePath, 0);
+        return new MenuDisplayFragment(courtName, timePath, currentTime, 0);
     }
 
     @Override

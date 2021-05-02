@@ -12,8 +12,10 @@ public class Hours {
     @Element(name = "EndTime")
     private String endTime;
 
-    public String[] getOperatingInfo() {
-        return new String[]{startTime, endTime};
+    public int[] getOperatingInfo() {
+        int startTimeInt = Integer.parseInt(startTime.replace(":",""));
+        int endTimeInt = Integer.parseInt(endTime.replace(":", ""));
+        return new int[]{startTimeInt, endTimeInt};
     }
 
 }
