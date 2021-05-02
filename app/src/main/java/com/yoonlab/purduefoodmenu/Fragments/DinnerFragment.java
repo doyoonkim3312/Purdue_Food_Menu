@@ -3,11 +3,14 @@ package com.yoonlab.purduefoodmenu.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yoonlab.purduefoodmenu.Adapter.RecyclerViewAdapter;
 import com.yoonlab.purduefoodmenu.Models.Item;
 import com.yoonlab.purduefoodmenu.Models.Menu;
 import com.yoonlab.purduefoodmenu.Models.Station;
@@ -22,7 +25,7 @@ import java.util.ArrayList;
  */
 public class DinnerFragment extends Fragment {
 
-    private ArrayList<String> dinnerResult = new ArrayList<>();
+    private ArrayList<Item> dinnerResult = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,9 +39,7 @@ public class DinnerFragment extends Fragment {
     public DinnerFragment(Menu menuResult) {
         for (Station station: menuResult.getMeals().getMealList().get(2).getStations()
                 .getStationList()) {
-            for (Item item: station.getItems().getItemList()) {
-                dinnerResult.add(item.getItemName());
-            }
+            dinnerResult.addAll(station.getItems().getItemList());
         }
     }
 
@@ -60,6 +61,13 @@ public class DinnerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_dinner, container, false);
+        RecyclerView dinnerRecyclerView = view.findViewById(R.id.dinnerRecyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext(),
+                LinearLayoutManager.VERTICAL, false);
+        dinnerRecyclerView.setLayoutManager(layoutManager);
+
+        RecyclerViewAdapter dinnerRecyclerViewAdapter = new RecyclerViewAdapter(dinnerResult);
+        dinnerRecyclerView.setAdapter(dinnerRecyclerViewAdapter);
         return view;
     }
 }

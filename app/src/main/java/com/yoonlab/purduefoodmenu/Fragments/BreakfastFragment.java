@@ -3,11 +3,14 @@ package com.yoonlab.purduefoodmenu.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.yoonlab.purduefoodmenu.Adapter.RecyclerViewAdapter;
 import com.yoonlab.purduefoodmenu.Models.Item;
 import com.yoonlab.purduefoodmenu.Models.Menu;
 import com.yoonlab.purduefoodmenu.Models.Station;
@@ -23,7 +26,7 @@ import java.util.ArrayList;
  */
 public class BreakfastFragment extends Fragment {
 
-    private ArrayList<String> breakfastResult = new ArrayList<>();
+    private ArrayList<Item> breakfastResult = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,9 +40,7 @@ public class BreakfastFragment extends Fragment {
     public BreakfastFragment(Menu breakfastMenu) {
         for (Station station: breakfastMenu.getMeals().getMealList().get(0).getStations()
                 .getStationList()) {
-            for (Item item: station.getItems().getItemList()) {
-                breakfastResult.add(item.getItemName());
-            }
+            breakfastResult.addAll(station.getItems().getItemList());
         }
     }
 
@@ -61,7 +62,13 @@ public class BreakfastFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_breakfast, container, false);
+        RecyclerView breakfastRecyclerView = view.findViewById(R.id.breakfastRecyclerView);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext(),
+                LinearLayoutManager.VERTICAL, false);
+        breakfastRecyclerView.setLayoutManager(layoutManager);
 
+        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(breakfastResult);
+        breakfastRecyclerView.setAdapter(recyclerViewAdapter);
         return view;
     }
 }
