@@ -1,26 +1,23 @@
 package com.yoonlab.purduefoodmenu.credentials;
 
+import java.util.UUID;
+
 public class Manager extends User
 {
     private UserType userType;
     private String department;
-    private String UID;
-
-
-
+    private UUID emID;
     private UserType UserType = userType.MANAGER;
 
-    public Manager(String password, String firstName, String lastName, String department, String userID)
+    public Manager(String password, String firstName, String lastName, String department)
     {
-        super(password, firstName, lastName, userID);
+        super(firstName, lastName, password);
         this.department = department;
-        this.UID = userID;
-
+        this.emID = UUID.randomUUID();
     }
 
-
     //Getter
-    public com.yoonlab.purduefoodmenu.credentials.UserType getUserType() {
+    public UserType getUserType() {
         return userType;
     }
 
@@ -28,23 +25,12 @@ public class Manager extends User
         return department;
     }
 
-    @Override
-    public String getUID() {
-        return UID;
-    }
-
-
     //Setter
-    public void setUserType(com.yoonlab.purduefoodmenu.credentials.UserType userType) {
+    public void setUserType(UserType userType) {
         this.userType = userType;
     }
 
     public void setDepartment(String department) {
         this.department = department;
-    }
-
-    @Override
-    public void setUID(String UID) {
-        this.UID = UID;
     }
 }
