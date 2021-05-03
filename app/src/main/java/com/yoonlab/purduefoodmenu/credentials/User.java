@@ -1,19 +1,21 @@
 package com.yoonlab.purduefoodmenu.credentials;
 
+import java.util.UUID;
+
 public class User {
 
     private String passwd;
     private String fName;
     private String lName;
-    private String UID;
+    private UUID UID;
 
 
-    public User(String password, String firstName, String lastName, String userID)
+    public User( String firstName, String lastName, String password)
     {
         passwd = password;
         fName = firstName;
         lName = lastName;
-        UID = userID;
+        UID = UUID.randomUUID();
     }
 
 
@@ -30,7 +32,7 @@ public class User {
         return lName;
     }
 
-    public String getUID() {
+    public UUID getUID() {
         return UID;
     }
 
@@ -46,9 +48,5 @@ public class User {
 
     public void setlName(String lName) {
         this.lName = lName;
-    }
-
-    public void setUID(String UID) {
-        this.UID = UID;
     }
 }

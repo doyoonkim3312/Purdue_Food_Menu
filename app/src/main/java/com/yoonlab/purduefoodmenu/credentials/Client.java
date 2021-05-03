@@ -4,9 +4,9 @@ public class Client extends User
 {
     private UserType userType = UserType.CLIENT;
 
-    public Client(String password, String firstName, String lastName, String userID)
+    public Client(String firstName, String lastName, String password)
     {
-        super(password, firstName, lastName, userID);
+        super(firstName, lastName, password);
         userType = UserType.CLIENT;
     }
 
