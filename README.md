@@ -18,3 +18,8 @@ information and displays it in uesr-friendly way. Using WebView for displaying i
 <img width="1255" alt="스크린샷 2021-04-24 오전 12 21 29" src="https://user-images.githubusercontent.com/61890844/115947041-1d151200-a493-11eb-8041-7b873780e7b1.png">
 
 <img width="1061" alt="스크린샷 2021-04-24 오전 12 22 06" src="https://user-images.githubusercontent.com/61890844/115947065-3fa72b00-a493-11eb-9c21-deb840764f55.png">
+
+
+## Application Preview
+
+![ScreenShots](https://user-images.githubusercontent.com/61890844/117090100-6da72d80-ad25-11eb-930a-4ab5efaaa572.png)
