@@ -15,7 +15,7 @@ information and displays it in uesr-friendly way. Using WebView for displaying i
 
 ## Structure Diagram
 
-<img width="1255" alt="스크린샷 2021-04-24 오전 12 21 29" src="https://user-images.githubusercontent.com/61890844/115947041-1d151200-a493-11eb-8041-7b873780e7b1.png">
+<img width="1282" alt="스크린샷 2021-05-06 오후 10 53 42" src="https://user-images.githubusercontent.com/61890844/117391452-f5c03b00-aebd-11eb-8516-332cd1a3290e.png">
 
 <img width="1061" alt="스크린샷 2021-04-24 오전 12 22 06" src="https://user-images.githubusercontent.com/61890844/115947065-3fa72b00-a493-11eb-9c21-deb840764f55.png">
 
